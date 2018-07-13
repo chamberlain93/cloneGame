@@ -1,0 +1,28 @@
+<board level="1">
+ 
+	<ball x="4.3" y="4.5" xVelocity="0" yVelocity="1.1" />
+	 
+	<cezmi1 x="5.3" y="500" score= "1" />
+	<cezmi2 x="15.1" y="500" score= "3" />
+
+	<cezeryes>
+		<cezerye x="4" y="5" time="0.5" />
+	</cezeryes>
+
+	<gizmos>
+		<squareTakoz x="7" y="6"/>
+		<triangleTakoz x="13" y="5" orientation="270" />
+		<firildak x="10" y="12" angle="135" />
+		<leftTokat x="11" y="6" orientation="0" />
+		<rightTokat x="5" y="7" orientation="0" />
+	</gizmos>
+
+	<keys>
+	  <key1left key="a" />
+	  <key1right key="s" />
+	  <key2left key="k" />
+	  <key2right key="l" />
+	</keys>
+
+
+</board>

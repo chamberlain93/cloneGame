@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:simpleType name="orientation">
+ <xs:restriction base="xs:string">
+  <xs:enumeration value="0" />
+  <xs:enumeration value="90" />
+  <xs:enumeration value="180" />
+  <xs:enumeration value="270" />
+ </xs:restriction>
+</xs:simpleType>
+
+<xs:complexType name="ball">
+ <xs:attribute name="xVelocity" type="xs:double" use="required" />
+ <xs:attribute name="yVelocity" type="xs:double" use="required" />
+ <xs:attribute name="x" type="xs:double" use="required"  />
+ <xs:attribute name="y" type="xs:double" use="required"  />
+ <xs:anyAttribute />
+</xs:complexType>
+
+<xs:complexType name="cezmi1">
+ <xs:attribute name="score" type="xs:double" use="required" />
+ <xs:attribute name="x" type="xs:double" use="required"  />
+ <xs:attribute name="y" type="xs:double" use="required"  />
+ <xs:anyAttribute />
+</xs:complexType>
+
+<xs:complexType name="cezmi2">
+ <xs:attribute name="score" type="xs:double" use="required" />
+ <xs:attribute name="x" type="xs:double" use="required" />
+ <xs:attribute name="y" type="xs:double" use="required"  />
+ <xs:anyAttribute />
+</xs:complexType>
+
+<xs:complexType name="key1left"> 
+ <xs:attribute name="key" type="xs:string" use="required" />
+ <xs:anyAttribute />
+</xs:complexType>
+
+<xs:complexType name="key1right"> 
+ <xs:attribute name="key" type="xs:string" use="required" />
+ <xs:anyAttribute />
+</xs:complexType>
+
+<xs:complexType name="key2left"> 
+ <xs:attribute name="key" type="xs:string" use="required" />
+ <xs:anyAttribute />
+</xs:complexType>
+
+<xs:complexType name="key2right"> 
+ <xs:attribute name="key" type="xs:string" use="required" />
+ <xs:anyAttribute />
+</xs:complexType>
+
+<xs:complexType name="cezerye">
+  <xs:attribute name="x" type="xs:integer" default="1" />  
+  <xs:attribute name="y" type="xs:integer" default="1" />  
+  <xs:attribute name="time" type="xs:double" default="0" />
+</xs:complexType>
+
+<xs:complexType name="squareTakoz"> 
+ <xs:attribute name="x" type="xs:integer" use="required" />
+ <xs:attribute name="y" type="xs:integer" use="required" />
+ <xs:anyAttribute />
+</xs:complexType>
+
+<xs:complexType name="triangleTakoz"> 
+ <xs:attribute name="x" type="xs:integer" use="required" />
+ <xs:attribute name="y" type="xs:integer" use="required" />
+ <xs:attribute name="orientation" type="orientation" use="required" />
+ <xs:anyAttribute />
+</xs:complexType>
+
+<xs:complexType name="firildak"> 
+ <xs:attribute name="x" type="xs:integer" use="required" />
+ <xs:attribute name="y" type="xs:integer" use="required" />
+ <xs:attribute name="angle" type="xs:integer" use="required" />
+ <xs:anyAttribute />
+</xs:complexType>
+
+<xs:complexType name="leftTokat"> 
+ <xs:attribute name="x" type="xs:integer" use="required" />
+ <xs:attribute name="y" type="xs:integer" use="required" />
+ <xs:attribute name="orientation" type="orientation" use="required" />
+ <xs:anyAttribute />
+</xs:complexType>
+
+<xs:complexType name="rightTokat"> 
+ <xs:attribute name="x" type="xs:integer" use="required" />
+ <xs:attribute name="y" type="xs:integer" use="required" />
+ <xs:attribute name="orientation" type="orientation" use="required" />
+ <xs:anyAttribute />
+</xs:complexType>
+
+<xs:group name="allGizmos">
+  <xs:choice>
+   <xs:element name="squareTakoz" type="squareTakoz" />
+   <xs:element name="triangleTakoz" type="triangleTakoz" />
+   <xs:element name="firildak" type="firildak" />
+   <xs:element name="leftTokat" type="leftTokat" />
+   <xs:element name="rightTokat" type="rightTokat" />
+  </xs:choice>
+</xs:group>
+
+<xs:group name="allKeys">
+  <xs:choice>
+   <xs:element name="key1left" type="key1left" />
+   <xs:element name="key1right" type="key1right" />
+   <xs:element name="key2left" type="key2left" />
+   <xs:element name="key2right" type="key2right" />
+  </xs:choice>
+</xs:group>
+
+<xs:group name="allCezeryes">
+  <xs:choice>
+    <xs:element name="cezerye" minOccurs="0" maxOccurs="unbounded" />
+  </xs:choice>
+</xs:group>
+
+<xs:element name="board">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element name="ball" type="ball" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="cezmi1" type="cezmi1" minOccurs="1" maxOccurs="1" />
+			<xs:element name="cezmi2" type="cezmi2" minOccurs="1" maxOccurs="1" />
+
+			<xs:element name="cezeryes">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="allCezeryes" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+
+			<xs:element name="gizmos">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="allGizmos" minOccurs="0" maxOccurs="unbounded" />
+					</xs:sequence>
+					<xs:anyAttribute />
+				</xs:complexType>
+			</xs:element>
+
+			<xs:element name="keys">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="allKeys" minOccurs="0" maxOccurs="unbounded" />
+					</xs:sequence>
+					<xs:anyAttribute />
+				</xs:complexType>
+			</xs:element>
+
+
+			<xs:any minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		
+		<xs:attribute name="friction1" type="xs:double" default=".025"/>
+		<xs:attribute name="friction2" type="xs:double" default=".025"/>
+		<xs:attribute name="gravity" type="xs:double" default="25.0"/>
+		<xs:attribute name="level" type="xs:integer" use="required" />
+	</xs:complexType>
+</xs:element>
+
+</xs:schema>

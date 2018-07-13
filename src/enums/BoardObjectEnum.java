@@ -1,0 +1,5 @@
+package enums;
+
+public enum BoardObjectEnum {
+	BALL, CEZMI, ENGEL, CEZERYE, FIRILDAK, TRIANGLE_TAKOZ, SQUARE_TAKOZ, LEFT_TOKAT, RIGHT_TOKAT, WALL
+}
