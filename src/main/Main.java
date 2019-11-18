@@ -9,6 +9,7 @@ public class Main {
 		myGameWindow.pack();
 		myGameWindow.setVisible(true);
 		myGameWindow.setResizable(false);
+		System.out.print("aaaaa");
 	}
 
 }
